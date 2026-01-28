@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${encodeURIComponent(product.id)}`}>
       <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition cursor-pointer">
         <Image
           src={product.imageLinks?.thumbnail || "/placeholder.png"}
