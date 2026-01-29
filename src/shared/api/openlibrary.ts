@@ -54,7 +54,7 @@ export const googleBooksApi = {
               ratingCount,
               imageLinks: item.cover_i
                 ? {
-                    thumbnail: `https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`,
+                    thumbnail: `https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`,
                   }
                 : undefined,
             };
