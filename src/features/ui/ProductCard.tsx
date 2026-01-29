@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch } from "@/store/store";
 import { toggleLike, deleteProduct } from "@/features/products/slice";
+import { useRouter } from "next/navigation";
 import styles from "./ProductCard.module.css";
 
 interface ProductCardProps {
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   return (
     <div className={styles.card}>
@@ -71,11 +73,11 @@ export default function ProductCard({ product }: ProductCardProps) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                alert("Книга добавлена в корзину!");
+                router.push(`/products/${encodeURIComponent(product.id)}`);
               }}
-              className={styles.addToCartButton}
+              className={styles.detailsButton}
             >
-              В корзину
+              Подробнее
             </button>
             <button
               onClick={(e) => {
