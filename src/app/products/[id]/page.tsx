@@ -99,10 +99,24 @@ export default function ProductDetailPage() {
                   : styles.likeButtonInactive
               }`}
             >
+              <Image
+                src="/love.svg"
+                alt="Like"
+                width={20}
+                height={20}
+                className={styles.likeIcon}
+              />
               {product.isLiked ? "В избранном" : "Добавить в избранное"}
             </button>
 
             <button onClick={handleDelete} className={styles.deleteButton}>
+              <Image
+                src="/trash.svg"
+                alt="Delete"
+                width={20}
+                height={20}
+                className={styles.deleteIcon}
+              />
               Удалить книгу
             </button>
           </div>
