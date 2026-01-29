@@ -9,6 +9,9 @@ export interface Book {
   isLiked?: boolean;
   publisher?: string;
   publishedDate?: string;
+  editionCount?: number;
+  rating?: number;
+  ratingCount?: number;
 }
 
 export interface ProductsState {

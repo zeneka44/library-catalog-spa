@@ -46,13 +46,15 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <div className={styles.content}>
-          <div className={styles.rating}>
-            <span className="text-[var(--warning)]">⭐</span>
-            <span className={styles.ratingValue}>4.5</span>
-            <span className={styles.ratingCount}>
-              ({Math.floor(Math.random() * 500 + 100)})
-            </span>
-          </div>
+          {product.rating && (
+            <div className={styles.rating}>
+              <span className="text-[var(--warning)]">⭐</span>
+              <span className={styles.ratingValue}>{product.rating}</span>
+              <span className={styles.ratingCount}>
+                ({product.ratingCount || 0})
+              </span>
+            </div>
+          )}
 
           <h3 className={styles.title}>{product.title}</h3>
 
