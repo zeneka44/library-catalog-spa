@@ -48,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className={styles.content}>
           {product.rating && (
             <div className={styles.rating}>
-              <span className="text-[var(--warning)]">⭐</span>
+              <Image src="/star.svg" alt="Rating" width={16} height={16} />
               <span className={styles.ratingValue}>{product.rating}</span>
               <span className={styles.ratingCount}>
                 ({product.ratingCount || 0})
