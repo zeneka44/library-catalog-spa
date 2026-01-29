@@ -46,15 +46,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <div className={styles.content}>
-          {product.rating && (
-            <div className={styles.rating}>
-              <Image src="/star.svg" alt="Rating" width={16} height={16} />
-              <span className={styles.ratingValue}>{product.rating}</span>
-              <span className={styles.ratingCount}>
-                ({product.ratingCount || 0})
-              </span>
-            </div>
-          )}
+          <div className={styles.rating}>
+            {product.rating ? (
+              <>
+                <Image src="/star.svg" alt="Rating" width={16} height={16} />
+                <span className={styles.ratingValue}>{product.rating}</span>
+                <span className={styles.ratingCount}>
+                  ({product.ratingCount || 0})
+                </span>
+              </>
+            ) : (
+              <span className={styles.ratingCount}>Нет оценок</span>
+            )}
+          </div>
 
           <h3 className={styles.title}>{product.title}</h3>
 
