@@ -4,6 +4,8 @@ export const selectAllProducts = (state: RootState) => state.products.items;
 
 export const selectFilter = (state: RootState) => state.products.filter;
 
+export const selectIsLoading = (state: RootState) => state.products.isLoading;
+
 export const selectFilteredProducts = (state: RootState) => {
   const { items, filter } = state.products;
   if (filter === "liked") {

@@ -1,12 +1,24 @@
 "use client";
 
 import { useAppSelector } from "@/store/store";
-import { selectFilteredProducts } from "@/features/products/selectors";
+import {
+  selectFilteredProducts,
+  selectAllProducts,
+} from "@/features/products/selectors";
 import ProductCard from "./ProductCard";
 import styles from "./ProductsList.module.css";
 
 export default function ProductsList() {
   const products = useAppSelector(selectFilteredProducts);
+  const allProducts = useAppSelector(selectAllProducts);
+
+  if (allProducts.length === 0) {
+    return (
+      <div className={styles.emptyState}>
+        <p className={styles.emptyTitle}>Загрузка книг...</p>
+      </div>
+    );
+  }
 
   if (products.length === 0) {
     return (
