@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/store/store";
 import { addProduct } from "@/features/products/slice";
 import Link from "next/link";
 import { Book } from "@/shared/types/product";
+import styles from "./page.module.css";
 
 export default function CreateProductPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function CreateProductPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -74,24 +75,17 @@ export default function CreateProductPage() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <div className="mb-6">
-        <Link
-          href="/products"
-          className="text-blue-500 hover:text-blue-600 mb-4 inline-block"
-        >
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <Link href="/products" className={styles.backLink}>
           ← Вернуться к каталогу
         </Link>
-        <h1 className="text-3xl font-bold">Добавить новую книгу</h1>
+        <h1 className={styles.title}>Добавить новую книгу</h1>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white rounded-lg shadow-md p-6 space-y-4"
-      >
-        {}
-        <div>
-          <label htmlFor="title" className="block text-sm font-medium mb-1">
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.fieldGroup}>
+          <label htmlFor="title" className={styles.label}>
             Название книги
           </label>
           <input
@@ -101,18 +95,17 @@ export default function CreateProductPage() {
             value={formData.title}
             onChange={handleChange}
             placeholder="Введите название книги"
-            className={`w-full p-3 border rounded-lg ${
-              errors.title ? "border-red-500" : "border-gray-300"
+            className={`${styles.input} ${
+              errors.title ? styles.inputError : ""
             }`}
           />
           {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+            <p className={styles.errorMessage}>{errors.title}</p>
           )}
         </div>
 
-        {}
-        <div>
-          <label htmlFor="authors" className="block text-sm font-medium mb-1">
+        <div className={styles.fieldGroup}>
+          <label htmlFor="authors" className={styles.label}>
             Автор
           </label>
           <input
@@ -122,16 +115,12 @@ export default function CreateProductPage() {
             value={formData.authors}
             onChange={handleChange}
             placeholder="Автор"
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className={styles.input}
           />
         </div>
 
-        {}
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium mb-1"
-          >
+        <div className={styles.fieldGroup}>
+          <label htmlFor="description" className={styles.label}>
             Описание
           </label>
           <textarea
@@ -141,13 +130,12 @@ export default function CreateProductPage() {
             onChange={handleChange}
             placeholder="Введите описание книги"
             rows={4}
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className={styles.textarea}
           />
         </div>
 
-        {}
-        <div>
-          <label htmlFor="publisher" className="block text-sm font-medium mb-1">
+        <div className={styles.fieldGroup}>
+          <label htmlFor="publisher" className={styles.label}>
             Издатель
           </label>
           <input
@@ -157,16 +145,12 @@ export default function CreateProductPage() {
             value={formData.publisher}
             onChange={handleChange}
             placeholder="Введите издателя"
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className={styles.input}
           />
         </div>
 
-        {}
-        <div>
-          <label
-            htmlFor="publishedDate"
-            className="block text-sm font-medium mb-1"
-          >
+        <div className={styles.fieldGroup}>
+          <label htmlFor="publishedDate" className={styles.label}>
             Дата публикации
           </label>
           <input
@@ -175,22 +159,15 @@ export default function CreateProductPage() {
             name="publishedDate"
             value={formData.publishedDate}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
+            className={styles.input}
           />
         </div>
 
-        {}
-        <div className="flex gap-4 pt-6">
-          <button
-            type="submit"
-            className="flex-1 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 font-medium"
-          >
+        <div className={styles.buttonGroup}>
+          <button type="submit" className={styles.submitButton}>
             Добавить книгу
           </button>
-          <Link
-            href="/products"
-            className="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-400 font-medium text-center"
-          >
+          <Link href="/products" className={styles.cancelButton}>
             Отмена
           </Link>
         </div>

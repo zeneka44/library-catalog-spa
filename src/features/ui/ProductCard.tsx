@@ -5,53 +5,95 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch } from "@/store/store";
 import { toggleLike, deleteProduct } from "@/features/products/slice";
+import styles from "./ProductCard.module.css";
 
 interface ProductCardProps {
-  product: Book;
+  readonly product: Book;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Link href={`/products/${encodeURIComponent(product.id)}`}>
-      <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition cursor-pointer">
+    <div className={styles.card}>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dispatch(toggleLike(product.id));
+        }}
+        className={styles.likeButton}
+      >
         <Image
-          src={product.imageLinks?.thumbnail || "/placeholder.png"}
-          alt={product.title}
-          width={300}
-          height={192}
-          className="w-full h-48 object-cover"
+          src="/love.svg"
+          alt="Like"
+          width={20}
+          height={20}
+          className={`${styles.likeIcon} ${
+            product.isLiked ? styles.likeIconActive : styles.likeIconInactive
+          }`}
         />
-        <div className="p-4">
-          <h3 className="font-bold text-lg mb-2 line-clamp-2">
-            {product.title}
-          </h3>
-          <p className="text-sm text-gray-600 line-clamp-3">
-            {product.description || "Нет описания"}
-          </p>
-          <div className="flex justify-between mt-4">
+      </button>
+
+      <Link href={`/products/${encodeURIComponent(product.id)}`}>
+        <div className={styles.imageContainer}>
+          <Image
+            src={product.imageLinks?.thumbnail || "/placeholder.png"}
+            alt={product.title}
+            fill
+            className={styles.image}
+          />
+        </div>
+
+        <div className={styles.content}>
+          {product.rating && (
+            <div className={styles.rating}>
+              <Image src="/star.svg" alt="Rating" width={16} height={16} />
+              <span className={styles.ratingValue}>{product.rating}</span>
+              <span className={styles.ratingCount}>
+                ({product.ratingCount || 0})
+              </span>
+            </div>
+          )}
+
+          <h3 className={styles.title}>{product.title}</h3>
+
+          {product.authors && product.authors.length > 0 && (
+            <p className={styles.authors}>{product.authors[0]}</p>
+          )}
+
+          <div className={styles.actions}>
             <button
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(toggleLike(product.id));
+                e.stopPropagation();
+                alert("Книга добавлена в корзину!");
               }}
-              className={`text-2xl ${product.isLiked ? "text-red-500" : "text-gray-400"}`}
+              className={styles.addToCartButton}
             >
-              ❤️
+              В корзину
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(deleteProduct(product.id));
+                e.stopPropagation();
+                if (confirm("Удалить эту книгу?")) {
+                  dispatch(deleteProduct(product.id));
+                }
               }}
-              className="text-xl text-gray-400 hover:text-red-500"
+              className={styles.deleteButton}
             >
-              🗑️
+              <Image
+                src="/trash.svg"
+                alt="Delete"
+                width={20}
+                height={20}
+                className={styles.deleteIcon}
+              />
             </button>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
