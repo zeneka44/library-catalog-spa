@@ -40,6 +40,13 @@ export default function ProductDetailPage() {
   return (
     <div className={styles.container}>
       <Link href="/products" className={styles.backLink}>
+        <Image
+          src="/arrow-left.svg"
+          alt="Back"
+          width={20}
+          height={20}
+          className={styles.backIcon}
+        />
         Вернуться к каталогу
       </Link>
 
@@ -99,10 +106,24 @@ export default function ProductDetailPage() {
                   : styles.likeButtonInactive
               }`}
             >
+              <Image
+                src="/love.svg"
+                alt="Like"
+                width={20}
+                height={20}
+                className={styles.likeIcon}
+              />
               {product.isLiked ? "В избранном" : "Добавить в избранное"}
             </button>
 
             <button onClick={handleDelete} className={styles.deleteButton}>
+              <Image
+                src="/trash.svg"
+                alt="Delete"
+                width={20}
+                height={20}
+                className={styles.deleteIcon}
+              />
               Удалить книгу
             </button>
           </div>

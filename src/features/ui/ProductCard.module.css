@@ -110,7 +110,7 @@
   gap: 0.5rem;
 }
 
-.addToCartButton {
+.detailsButton {
   flex: 1;
   padding: 0.625rem 1rem;
   border-radius: 0.5rem;
@@ -123,7 +123,7 @@
   transition: background-color 0.2s ease;
 }
 
-.addToCartButton:hover {
+.detailsButton:hover {
   background-color: var(--primary-green-dark);
 }
 

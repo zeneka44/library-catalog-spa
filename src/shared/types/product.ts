@@ -17,4 +17,5 @@ export interface Book {
 export interface ProductsState {
   items: Book[];
   filter: "all" | "liked";
+  isLoading: boolean;
 }

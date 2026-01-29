@@ -8,7 +8,14 @@
   color: var(--link);
   text-decoration: none;
   margin-bottom: 1.5rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backIcon {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .backLink:hover {
@@ -121,11 +128,23 @@
   transition: background-color 0.2s ease;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.likeIcon {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .likeButtonActive {
   background-color: var(--button-active-bg);
   color: var(--text-on-primary);
+}
+
+.likeButtonActive .likeIcon {
+  opacity: 1;
 }
 
 .likeButtonActive:hover {
@@ -135,6 +154,10 @@
 .likeButtonInactive {
   background-color: var(--surface-alt);
   color: var(--text-secondary);
+}
+
+.likeButtonInactive .likeIcon {
+  opacity: 0.4;
 }
 
 .likeButtonInactive:hover {
@@ -151,6 +174,14 @@
   transition: background-color 0.2s ease;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deleteIcon {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .deleteButton:hover {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch } from "@/store/store";
 import { toggleLike, deleteProduct } from "@/features/products/slice";
+import { useRouter } from "next/navigation";
 import styles from "./ProductCard.module.css";
 
 interface ProductCardProps {
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   return (
     <div className={styles.card}>
@@ -46,15 +48,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <div className={styles.content}>
-          {product.rating && (
-            <div className={styles.rating}>
-              <Image src="/star.svg" alt="Rating" width={16} height={16} />
-              <span className={styles.ratingValue}>{product.rating}</span>
-              <span className={styles.ratingCount}>
-                ({product.ratingCount || 0})
-              </span>
-            </div>
-          )}
+          <div className={styles.rating}>
+            {product.rating ? (
+              <>
+                <Image src="/star.svg" alt="Rating" width={16} height={16} />
+                <span className={styles.ratingValue}>{product.rating}</span>
+                <span className={styles.ratingCount}>
+                  ({product.ratingCount || 0})
+                </span>
+              </>
+            ) : (
+              <span className={styles.ratingCount}>Нет оценок</span>
+            )}
+          </div>
 
           <h3 className={styles.title}>{product.title}</h3>
 
@@ -67,11 +73,11 @@ export default function ProductCard({ product }: ProductCardProps) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                alert("Книга добавлена в корзину!");
+                router.push(`/products/${encodeURIComponent(product.id)}`);
               }}
-              className={styles.addToCartButton}
+              className={styles.detailsButton}
             >
-              В корзину
+              Подробнее
             </button>
             <button
               onClick={(e) => {

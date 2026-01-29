@@ -57,3 +57,18 @@
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--text-muted);
+}
