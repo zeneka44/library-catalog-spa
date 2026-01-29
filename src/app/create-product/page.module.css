@@ -12,7 +12,14 @@
   color: var(--link);
   text-decoration: none;
   margin-bottom: 1rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backIcon {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .backLink:hover {
@@ -64,6 +71,7 @@
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   resize: vertical;
+  font-family: inherit;
 }
 
 .errorMessage {

@@ -40,6 +40,13 @@ export default function ProductDetailPage() {
   return (
     <div className={styles.container}>
       <Link href="/products" className={styles.backLink}>
+        <Image
+          src="/arrow-left.svg"
+          alt="Back"
+          width={20}
+          height={20}
+          className={styles.backIcon}
+        />
         Вернуться к каталогу
       </Link>
 

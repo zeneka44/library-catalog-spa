@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/store";
 import { addProduct } from "@/features/products/slice";
 import Link from "next/link";
+import Image from "next/image";
 import { Book } from "@/shared/types/product";
 import styles from "./page.module.css";
 
@@ -78,7 +79,14 @@ export default function CreateProductPage() {
     <div className={styles.container}>
       <div className={styles.header}>
         <Link href="/products" className={styles.backLink}>
-          ← Вернуться к каталогу
+          <Image
+            src="/arrow-left.svg"
+            alt="Back"
+            width={20}
+            height={20}
+            className={styles.backIcon}
+          />
+          Вернуться к каталогу
         </Link>
         <h1 className={styles.title}>Добавить новую книгу</h1>
       </div>
