@@ -6,6 +6,7 @@ import { selectProductById } from "@/features/products/selectors";
 import { toggleLike, deleteProduct } from "@/features/products/slice";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -17,15 +18,12 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="p-6 text-center">
-        <h1 className="text-2xl font-bold mb-4">Книга не найдена</h1>
-        <p className="text-gray-600 mb-6">
+      <div className={styles.notFound}>
+        <h1 className={styles.notFoundTitle}>Книга не найдена</h1>
+        <p className={styles.notFoundText}>
           К сожалению, эта книга больше не в каталоге
         </p>
-        <Link
-          href="/products"
-          className="text-blue-500 hover:text-blue-600 font-medium"
-        >
+        <Link href="/products" className={styles.notFoundLink}>
           Вернуться к каталогу
         </Link>
       </div>
@@ -40,88 +38,71 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      {}
-      <Link
-        href="/products"
-        className="text-blue-500 hover:text-blue-600 mb-6 inline-block"
-      >
+    <div className={styles.container}>
+      <Link href="/products" className={styles.backLink}>
         Вернуться к каталогу
       </Link>
 
-      {}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {}
-        <div className="flex justify-center md:justify-start">
+      <div className={styles.grid}>
+        <div className={styles.imageWrapper}>
           {product.imageLinks?.thumbnail ? (
             <Image
               src={product.imageLinks.thumbnail}
               alt={product.title}
               width={300}
               height={450}
-              className="rounded-lg shadow-lg"
+              className={styles.image}
             />
           ) : (
-            <div className="w-72 h-96 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
-              Нет обложки
-            </div>
+            <div className={styles.imagePlaceholder}>Нет обложки</div>
           )}
         </div>
 
-        {}
-        <div className="md:col-span-2">
-          {}
-          <h1 className="text-4xl font-bold mb-2">{product.title}</h1>
+        <div className={styles.content}>
+          <h1 className={styles.mainTitle}>{product.title}</h1>
 
-          {}
           {product.authors && product.authors.length > 0 && (
-            <p className="text-lg text-gray-600 mb-4">
-              <span className="font-semibold">Авторы:</span>{" "}
+            <p className={styles.authors}>
+              <span className={styles.authorsLabel}>Авторы:</span>{" "}
               {product.authors.join(", ")}
             </p>
           )}
 
-          {}
-          <div className="space-y-2 mb-6 text-gray-700">
+          <div className={styles.details}>
             {product.publisher && (
               <p>
-                <span className="font-semibold">Издатель:</span>{" "}
+                <span className={styles.detailLabel}>Издатель:</span>{" "}
                 {product.publisher}
               </p>
             )}
             {product.publishedDate && (
               <p>
-                <span className="font-semibold">Год публикации:</span>{" "}
+                <span className={styles.detailLabel}>Год публикации:</span>{" "}
                 {product.publishedDate}
               </p>
             )}
           </div>
 
-          {}
           {product.description && (
-            <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-3">Описание</h2>
-              <p className="text-gray-700 leading-7">{product.description}</p>
+            <div className={styles.descriptionSection}>
+              <h2 className={styles.descriptionTitle}>Описание</h2>
+              <p className={styles.descriptionText}>{product.description}</p>
             </div>
           )}
 
-          {}
-          <div className="flex gap-4 mt-8">
+          <div className={styles.actions}>
             <button
               onClick={() => dispatch(toggleLike(id))}
-              className={`px-6 py-3 rounded-lg font-medium text-lg transition ${
+              className={`${styles.likeButton} ${
                 product.isLiked
-                  ? "bg-red-500 text-white hover:bg-red-600"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? styles.likeButtonActive
+                  : styles.likeButtonInactive
               }`}
             >
               {product.isLiked ? "В избранном" : "Добавить в избранное"}
             </button>
 
-            <button
-              onClick={handleDelete}
-              className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium text-lg transition"
-            >
+            <button onClick={handleDelete} className={styles.deleteButton}>
               Удалить книгу
             </button>
           </div>

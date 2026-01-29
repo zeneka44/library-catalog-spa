@@ -5,6 +5,7 @@ import { setFilter, setProducts } from "@/features/products/slice";
 import { selectFilter } from "@/features/products/selectors";
 import { googleBooksApi } from "@/shared/api/openlibrary";
 import { useEffect } from "react";
+import styles from "./ProductsFilters.module.css";
 
 export default function ProductsFilters() {
   const dispatch = useAppDispatch();
@@ -19,20 +20,20 @@ export default function ProductsFilters() {
   }, [dispatch]);
 
   return (
-    <div className="mb-6">
-      <div className="flex gap-4">
+    <div className={styles.container}>
+      <div className={styles.buttons}>
         <button
           onClick={() => dispatch(setFilter("all"))}
-          className={`px-4 py-2 rounded ${
-            filter === "all" ? "bg-blue-500 text-white" : "bg-gray-200"
+          className={`${styles.button} ${
+            filter === "all" ? styles.buttonActive : styles.buttonInactive
           }`}
         >
           Все книги
         </button>
         <button
           onClick={() => dispatch(setFilter("liked"))}
-          className={`px-4 py-2 rounded ${
-            filter === "liked" ? "bg-blue-500 text-white" : "bg-gray-200"
+          className={`${styles.button} ${
+            filter === "liked" ? styles.buttonActive : styles.buttonInactive
           }`}
         >
           Избранное
