@@ -21,16 +21,47 @@ export default function CreateProductPage() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case "title":
+        if (!value.trim()) return "Поле обязательно";
+        if (value.length < 3)
+          return "Название должно содержать не менее 3 символов";
+        return "";
+      case "authors":
+        if (!value.trim()) return "Поле обязательно";
+        if (value.length < 2)
+          return "Имя автора должно содержать не менее 2 символов";
+        return "";
+      case "description":
+        if (!value.trim()) return "Поле обязательно";
+        if (value.length < 10)
+          return "Описание должно содержать не менее 10 символов";
+        return "";
+      case "publisher":
+        if (!value.trim()) return "Поле обязательно";
+        if (value.length < 2)
+          return "Название издателя должно содержать не менее 2 символов";
+        return "";
+      case "publishedDate": {
+        if (!value) return "Поле обязательно";
+        const selectedDate = new Date(value);
+        const today = new Date();
+        if (selectedDate > today)
+          return "Дата публикации не может быть в будущем";
+        return "";
+      }
+      default:
+        return "";
+    }
+  };
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-
-    if (!formData.title.trim()) {
-      newErrors.title = "Название книги обязательно";
-    }
-    if (formData.title.length < 3) {
-      newErrors.title = "Название должно быть минимум 3 символа";
-    }
-
+    Object.entries(formData).forEach(([name, value]) => {
+      const error = validateField(name, value);
+      if (error) newErrors[name] = error;
+    });
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -67,12 +98,12 @@ export default function CreateProductPage() {
       ...prev,
       [name]: value,
     }));
-    if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
-    }
+
+    const error = validateField(name, value);
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error,
+    }));
   };
 
   return (
@@ -122,9 +153,14 @@ export default function CreateProductPage() {
             name="authors"
             value={formData.authors}
             onChange={handleChange}
-            placeholder="Автор"
-            className={styles.input}
+            placeholder="Введите имя автора"
+            className={`${styles.input} ${
+              errors.authors ? styles.inputError : ""
+            }`}
           />
+          {errors.authors && (
+            <p className={styles.errorMessage}>{errors.authors}</p>
+          )}
         </div>
 
         <div className={styles.fieldGroup}>
@@ -138,8 +174,13 @@ export default function CreateProductPage() {
             onChange={handleChange}
             placeholder="Введите описание книги"
             rows={4}
-            className={styles.textarea}
+            className={`${styles.textarea} ${
+              errors.description ? styles.inputError : ""
+            }`}
           />
+          {errors.description && (
+            <p className={styles.errorMessage}>{errors.description}</p>
+          )}
         </div>
 
         <div className={styles.fieldGroup}>
@@ -153,8 +194,13 @@ export default function CreateProductPage() {
             value={formData.publisher}
             onChange={handleChange}
             placeholder="Введите издателя"
-            className={styles.input}
+            className={`${styles.input} ${
+              errors.publisher ? styles.inputError : ""
+            }`}
           />
+          {errors.publisher && (
+            <p className={styles.errorMessage}>{errors.publisher}</p>
+          )}
         </div>
 
         <div className={styles.fieldGroup}>
@@ -167,8 +213,13 @@ export default function CreateProductPage() {
             name="publishedDate"
             value={formData.publishedDate}
             onChange={handleChange}
-            className={styles.input}
+            className={`${styles.input} ${
+              errors.publishedDate ? styles.inputError : ""
+            }`}
           />
+          {errors.publishedDate && (
+            <p className={styles.errorMessage}>{errors.publishedDate}</p>
+          )}
         </div>
 
         <div className={styles.buttonGroup}>
