@@ -4,6 +4,8 @@
 
 **Стек:** Next.js 14, React 18, TypeScript, Redux Toolkit, CSS Modules
 
+Live превью: `https://zeneka44.github.io/restaurant-landing-page`
+
 ## Установка и запуск
 
 ### Установка зависимостей
@@ -18,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Приложение доступно по адресу `https://zeneka44.github.io/library-catalog-spa`
+Приложение доступно по адресу `http://localhost:3000`
 
 ### Сборка для продакшена
 
