@@ -64,7 +64,8 @@
   box-sizing: border-box;
 }
 
-.inputError {
+input.inputError,
+textarea.inputError {
   border-color: var(--danger);
 }
 

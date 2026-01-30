@@ -10,14 +10,17 @@ import styles from "./ProductsFilters.module.css";
 export default function ProductsFilters() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector(selectFilter);
+  const allProducts = useAppSelector((state) => state.products.items);
 
   useEffect(() => {
-    const loadInitialBooks = async () => {
-      const books = await googleBooksApi.searchBooks("fiction", 20);
-      dispatch(setProducts(books));
-    };
-    loadInitialBooks();
-  }, [dispatch]);
+    if (allProducts.length === 0) {
+      const loadInitialBooks = async () => {
+        const books = await googleBooksApi.searchBooks("fiction", 20);
+        dispatch(setProducts(books));
+      };
+      loadInitialBooks();
+    }
+  }, [dispatch, allProducts.length]);
 
   return (
     <div className={styles.container}>
