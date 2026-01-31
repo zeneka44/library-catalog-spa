@@ -3,7 +3,7 @@
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setFilter, setProducts } from "@/features/products/slice";
 import { selectFilter } from "@/features/products/selectors";
-import { googleBooksApi } from "@/shared/api/openlibrary";
+import { booksApi } from "@/shared/api/openlibrary";
 import { useEffect } from "react";
 import styles from "./ProductsFilters.module.css";
 
@@ -15,7 +15,7 @@ export default function ProductsFilters() {
   useEffect(() => {
     if (allProducts.length === 0) {
       const loadInitialBooks = async () => {
-        const books = await googleBooksApi.searchBooks("fiction", 20);
+        const books = await booksApi.searchBooks("fiction", 20);
         dispatch(setProducts(books));
       };
       loadInitialBooks();
