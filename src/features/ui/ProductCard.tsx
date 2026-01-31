@@ -30,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         className={styles.likeButton}
       >
         <Image
-          src="/love.svg"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/love.svg`}
           alt="Like"
           width={20}
           height={20}
@@ -53,7 +53,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className={styles.rating}>
           {product.rating ? (
             <>
-              <Image src="/star.svg" alt="Rating" width={16} height={16} />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/star.svg`}
+                alt="Rating"
+                width={16}
+                height={16}
+              />
               <span className={styles.ratingValue}>{product.rating}</span>
               <span className={styles.ratingCount}>
                 ({product.ratingCount || 0})
@@ -92,7 +97,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className={styles.deleteButton}
           >
             <Image
-              src="/trash.svg"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/trash.svg`}
               alt="Delete"
               width={20}
               height={20}

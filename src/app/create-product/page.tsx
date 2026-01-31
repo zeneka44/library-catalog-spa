@@ -104,7 +104,7 @@ export default function CreateProductPage() {
       <div className={styles.header}>
         <Link href="/products" className={styles.backLink}>
           <Image
-            src="/arrow-left.svg"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/arrow-left.svg`}
             alt="Back"
             width={20}
             height={20}

@@ -88,7 +88,7 @@ export default function ProductModal({ id }: ProductModalProps) {
                 {product.rating ? (
                   <>
                     <Image
-                      src="/star.svg"
+                      src={`${process.env.NEXT_PUBLIC_BASE_PATH}/star.svg`}
                       alt="Rating"
                       width={16}
                       height={16}
@@ -123,14 +123,24 @@ export default function ProductModal({ id }: ProductModalProps) {
                   product.isLiked ? styles.actionButtonActive : ""
                 }`}
               >
-                <Image src="/love.svg" alt="Like" width={20} height={20} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/love.svg`}
+                  alt="Like"
+                  width={20}
+                  height={20}
+                />
                 {product.isLiked ? "В избранном" : "В избранное"}
               </button>
               <button
                 onClick={handleDelete}
                 className={`${styles.actionButton} ${styles.deleteButton}`}
               >
-                <Image src="/trash.svg" alt="Delete" width={20} height={20} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/trash.svg`}
+                  alt="Delete"
+                  width={20}
+                  height={20}
+                />
                 Удалить
               </button>
             </div>
