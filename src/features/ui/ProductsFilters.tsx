@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setFilter, setProducts } from "@/features/products/slice";
 import { selectFilter } from "@/features/products/selectors";
 import { booksApi } from "@/shared/api/openlibrary";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./ProductsFilters.module.css";
 
 const STORAGE_KEY = "library-catalog-products";
@@ -13,26 +13,29 @@ export default function ProductsFilters() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector(selectFilter);
   const allProducts = useAppSelector((state) => state.products.items);
+  const isInitializedRef = useRef(false);
 
   useEffect(() => {
-    const savedProducts = localStorage.getItem(STORAGE_KEY);
-    if (savedProducts) {
-      try {
-        const products = JSON.parse(savedProducts);
-        dispatch(setProducts(products));
-        return;
-      } catch {
-      }
-    }
+    if (isInitializedRef.current) return;
+    isInitializedRef.current = true;
 
-    if (allProducts.length === 0) {
-      const loadInitialBooks = async () => {
-        const books = await booksApi.searchBooks("fiction", 20);
-        dispatch(setProducts(books));
-      };
-      loadInitialBooks();
-    }
-  }, [dispatch, allProducts.length]);
+    const loadBooks = async () => {
+      const savedProducts = localStorage.getItem(STORAGE_KEY);
+      if (savedProducts) {
+        try {
+          const products = JSON.parse(savedProducts);
+          dispatch(setProducts(products));
+          return;
+        } catch {
+        }
+      }
+
+      const books = await booksApi.searchBooks("fiction", 20);
+      dispatch(setProducts(books));
+    };
+
+    loadBooks();
+  }, [dispatch]);
 
   useEffect(() => {
     if (allProducts.length > 0) {
