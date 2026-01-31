@@ -42,7 +42,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <div className={styles.imageContainer}>
         <Image
-          src={product.imageLinks?.thumbnail || "/placeholder.png"}
+          src={
+            product.imageLinks?.thumbnail ||
+            `${process.env.NEXT_PUBLIC_BASE_PATH}/placeholder.png`
+          }
           alt={product.title}
           fill
           className={styles.image}

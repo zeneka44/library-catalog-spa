@@ -7,12 +7,24 @@ import { booksApi } from "@/shared/api/openlibrary";
 import { useEffect } from "react";
 import styles from "./ProductsFilters.module.css";
 
+const STORAGE_KEY = "library-catalog-products";
+
 export default function ProductsFilters() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector(selectFilter);
   const allProducts = useAppSelector((state) => state.products.items);
 
   useEffect(() => {
+    const savedProducts = localStorage.getItem(STORAGE_KEY);
+    if (savedProducts) {
+      try {
+        const products = JSON.parse(savedProducts);
+        dispatch(setProducts(products));
+        return;
+      } catch {
+      }
+    }
+
     if (allProducts.length === 0) {
       const loadInitialBooks = async () => {
         const books = await booksApi.searchBooks("fiction", 20);
@@ -21,6 +33,12 @@ export default function ProductsFilters() {
       loadInitialBooks();
     }
   }, [dispatch, allProducts.length]);
+
+  useEffect(() => {
+    if (allProducts.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(allProducts));
+    }
+  }, [allProducts]);
 
   return (
     <div className={styles.container}>
