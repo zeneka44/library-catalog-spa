@@ -1,11 +1,17 @@
 "use client";
 
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import ProductsList from "@/features/ui/ProductsList";
 import ProductsFilters from "@/features/ui/ProductsFilters";
+import ProductModal from "@/features/ui/ProductModal";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function ProductsPage() {
+function ProductsPageContent() {
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -26,6 +32,16 @@ export default function ProductsPage() {
         <ProductsFilters />
         <ProductsList />
       </main>
+
+      {productId && <ProductModal id={decodeURIComponent(productId)} />}
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }

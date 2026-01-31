@@ -3,7 +3,7 @@ import { Book } from "@/shared/types/product";
 
 const BASE_URL = "https://openlibrary.org";
 
-export const googleBooksApi = {
+export const booksApi = {
   searchBooks: async (query: string, maxResults = 20): Promise<Book[]> => {
     try {
       const response = await axios.get(`${BASE_URL}/search.json`, {

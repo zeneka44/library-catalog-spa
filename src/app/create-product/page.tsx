@@ -16,7 +16,6 @@ export default function CreateProductPage() {
     title: "",
     authors: "",
     description: "",
-    publisher: "",
     publishedDate: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -37,11 +36,6 @@ export default function CreateProductPage() {
         if (!value.trim()) return "Поле обязательно";
         if (value.length < 10)
           return "Описание должно содержать не менее 10 символов";
-        return "";
-      case "publisher":
-        if (!value.trim()) return "Поле обязательно";
-        if (value.length < 2)
-          return "Название издателя должно содержать не менее 2 символов";
         return "";
       case "publishedDate": {
         if (!value) return "Поле обязательно";
@@ -80,7 +74,6 @@ export default function CreateProductPage() {
         ? formData.authors.split(",").map((a) => a.trim())
         : undefined,
       description: formData.description || undefined,
-      publisher: formData.publisher || undefined,
       publishedDate: formData.publishedDate || undefined,
       imageLinks: undefined,
       isLiked: false,
@@ -182,27 +175,6 @@ export default function CreateProductPage() {
             <p className={styles.errorMessage}>{errors.description}</p>
           )}
         </div>
-
-        <div className={styles.fieldGroup}>
-          <label htmlFor="publisher" className={styles.label}>
-            Издатель
-          </label>
-          <input
-            type="text"
-            id="publisher"
-            name="publisher"
-            value={formData.publisher}
-            onChange={handleChange}
-            placeholder="Введите издателя"
-            className={`${styles.input} ${
-              errors.publisher ? styles.inputError : ""
-            }`}
-          />
-          {errors.publisher && (
-            <p className={styles.errorMessage}>{errors.publisher}</p>
-          )}
-        </div>
-
         <div className={styles.fieldGroup}>
           <label htmlFor="publishedDate" className={styles.label}>
             Дата публикации
