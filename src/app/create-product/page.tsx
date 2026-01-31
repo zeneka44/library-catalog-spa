@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { addProduct } from "@/features/products/slice";
+import { selectAllProducts } from "@/features/products/selectors";
 import Link from "next/link";
 import Image from "next/image";
 import { Book } from "@/shared/types/product";
 import styles from "./page.module.css";
 
+const STORAGE_KEY = "library-catalog-products";
+
 export default function CreateProductPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const allProducts = useAppSelector(selectAllProducts);
   const [formData, setFormData] = useState({
     title: "",
     authors: "",
@@ -80,6 +84,8 @@ export default function CreateProductPage() {
     };
 
     dispatch(addProduct(newBook));
+    const nextProducts = [newBook, ...allProducts];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextProducts));
     router.push("/products");
   };
 
