@@ -15,7 +15,7 @@ export default function ProductsList() {
   if (allProducts.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <p className={styles.emptyTitle}>Загрузка книг...</p>
+        <p className={styles.emptyTitle}>Loading books...</p>
       </div>
     );
   }
@@ -23,9 +23,9 @@ export default function ProductsList() {
   if (products.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <p className={styles.emptyTitle}>Список книг пуст</p>
+        <p className={styles.emptyTitle}>Book list is empty</p>
         <p className={styles.emptyText}>
-          Добавьте первую книгу через кнопку &quot;Добавить книгу&quot;
+          Add your first book using the &quot;Add book&quot; button
         </p>
       </div>
     );

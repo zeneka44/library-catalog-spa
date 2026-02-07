@@ -27,26 +27,25 @@ export default function CreateProductPage() {
   const validateField = (name: string, value: string) => {
     switch (name) {
       case "title":
-        if (!value.trim()) return "Поле обязательно";
-        if (value.length < 3)
-          return "Название должно содержать не менее 3 символов";
+        if (!value.trim()) return "Field is required";
+        if (value.length < 3) return "Title must be at least 3 characters";
         return "";
       case "authors":
-        if (!value.trim()) return "Поле обязательно";
+        if (!value.trim()) return "Field is required";
         if (value.length < 2)
-          return "Имя автора должно содержать не менее 2 символов";
+          return "Author name must be at least 2 characters";
         return "";
       case "description":
-        if (!value.trim()) return "Поле обязательно";
+        if (!value.trim()) return "Field is required";
         if (value.length < 10)
-          return "Описание должно содержать не менее 10 символов";
+          return "Description must be at least 10 characters";
         return "";
       case "publishedDate": {
-        if (!value) return "Поле обязательно";
+        if (!value) return "Field is required";
         const selectedDate = new Date(value);
         const today = new Date();
         if (selectedDate > today)
-          return "Дата публикации не может быть в будущем";
+          return "Publication date cannot be in the future";
         return "";
       }
       default:
@@ -116,15 +115,15 @@ export default function CreateProductPage() {
             height={20}
             className={styles.backIcon}
           />
-          Вернуться к каталогу
+          Back to catalog
         </Link>
-        <h1 className={styles.title}>Добавить новую книгу</h1>
+        <h1 className={styles.title}>Add new book</h1>
       </div>
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.fieldGroup}>
           <label htmlFor="title" className={styles.label}>
-            Название книги
+            Book title
           </label>
           <input
             type="text"
@@ -132,7 +131,7 @@ export default function CreateProductPage() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            placeholder="Введите название книги"
+            placeholder="Enter book title"
             className={`${styles.input} ${
               errors.title ? styles.inputError : ""
             }`}
@@ -144,7 +143,7 @@ export default function CreateProductPage() {
 
         <div className={styles.fieldGroup}>
           <label htmlFor="authors" className={styles.label}>
-            Автор
+            Author
           </label>
           <input
             type="text"
@@ -152,7 +151,7 @@ export default function CreateProductPage() {
             name="authors"
             value={formData.authors}
             onChange={handleChange}
-            placeholder="Введите имя автора"
+            placeholder="Enter author name"
             className={`${styles.input} ${
               errors.authors ? styles.inputError : ""
             }`}
@@ -164,14 +163,14 @@ export default function CreateProductPage() {
 
         <div className={styles.fieldGroup}>
           <label htmlFor="description" className={styles.label}>
-            Описание
+            Description
           </label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Введите описание книги"
+            placeholder="Enter book description"
             rows={4}
             className={`${styles.textarea} ${
               errors.description ? styles.inputError : ""
@@ -183,7 +182,7 @@ export default function CreateProductPage() {
         </div>
         <div className={styles.fieldGroup}>
           <label htmlFor="publishedDate" className={styles.label}>
-            Дата публикации
+            Publication date
           </label>
           <input
             type="date"
@@ -202,10 +201,10 @@ export default function CreateProductPage() {
 
         <div className={styles.buttonGroup}>
           <button type="submit" className={styles.submitButton}>
-            Добавить книгу
+            Add book
           </button>
           <Link href="/products" className={styles.cancelButton}>
-            Отмена
+            Cancel
           </Link>
         </div>
       </form>

@@ -22,7 +22,7 @@ export default function ProductModal({ id }: ProductModalProps) {
   };
 
   const handleDelete = () => {
-    if (confirm("Вы уверены, что хотите удалить эту книгу?")) {
+    if (confirm("Are you sure you want to delete this book?")) {
       dispatch(deleteProduct(id));
       router.push("/products");
     }
@@ -43,8 +43,8 @@ export default function ProductModal({ id }: ProductModalProps) {
             ✕
           </button>
           <div className={styles.notFound}>
-            <h2>Книга не найдена</h2>
-            <p>К сожалению, эта книга больше не в каталоге</p>
+            <h2>Book not found</h2>
+            <p>Unfortunately, this book is no longer in the catalog</p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default function ProductModal({ id }: ProductModalProps) {
                 className={styles.image}
               />
             ) : (
-              <div className={styles.imagePlaceholder}>Нет обложки</div>
+              <div className={styles.imagePlaceholder}>No cover</div>
             )}
           </div>
 
@@ -78,13 +78,13 @@ export default function ProductModal({ id }: ProductModalProps) {
 
             {product.authors?.length > 0 && (
               <p className={styles.authors}>
-                <strong>Авторы:</strong> {product.authors.join(", ")}
+                <strong>Authors:</strong> {product.authors.join(", ")}
               </p>
             )}
 
             <div className={styles.details}>
               <div className={styles.detailsRow}>
-                <span className={styles.ratingLabel}>Рейтинг:</span>
+                <span className={styles.ratingLabel}>Rating:</span>
                 {product.rating ? (
                   <>
                     <Image
@@ -99,19 +99,19 @@ export default function ProductModal({ id }: ProductModalProps) {
                     </span>
                   </>
                 ) : (
-                  <span className={styles.ratingCount}>Нет оценок</span>
+                  <span className={styles.ratingCount}>No ratings yet</span>
                 )}
               </div>
               {product.publishedDate && (
                 <p>
-                  <strong>Год публикации:</strong> {product.publishedDate}
+                  <strong>Publication year:</strong> {product.publishedDate}
                 </p>
               )}
             </div>
 
             {product.description && (
               <div className={styles.descriptionSection}>
-                <h3 className={styles.descriptionTitle}>Описание</h3>
+                <h3 className={styles.descriptionTitle}>Description</h3>
                 <p className={styles.descriptionText}>{product.description}</p>
               </div>
             )}
@@ -129,7 +129,7 @@ export default function ProductModal({ id }: ProductModalProps) {
                   width={20}
                   height={20}
                 />
-                {product.isLiked ? "В избранном" : "В избранное"}
+                {product.isLiked ? "Saved to Favorites" : "Add to Favorites"}
               </button>
               <button
                 onClick={handleDelete}
@@ -141,7 +141,7 @@ export default function ProductModal({ id }: ProductModalProps) {
                   width={20}
                   height={20}
                 />
-                Удалить
+                Delete
               </button>
             </div>
           </div>

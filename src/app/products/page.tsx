@@ -19,10 +19,10 @@ function ProductsPageContent() {
           <div className={styles.headerInner}>
             <div>
               <h1 className={styles.headerTitle}>Booklet</h1>
-              <p className={styles.headerSubtitle}>Ваш книжный каталог</p>
+              <p className={styles.headerSubtitle}>Your book catalog</p>
             </div>
             <Link href="/create-product" className={styles.addButton}>
-              Добавить книгу
+              Add book
             </Link>
           </div>
         </div>

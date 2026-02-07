@@ -1,77 +1,77 @@
 # Library Catalog SPA
 
-Веб-приложение каталога книг, позволяющее пользователям просматривать, добавлять и управлять своей коллекцией книг с функцией добавления в избранное.
+A web application for a book catalog that allows users to view, add, and manage their book collection with a favorites feature.
 
-**Стек:** Next.js 14, React 18, TypeScript, Redux Toolkit, CSS Modules
+**Stack:** Next.js 14, React 18, TypeScript, Redux Toolkit, CSS Modules
 
-Live превью: `https://zeneka44.github.io/restaurant-landing-page`
+Live preview: `https://zeneka44.github.io/library-catalog-spa`
 
-## Установка и запуск
+## Installation and Launch
 
-### Установка зависимостей
+### Installing Dependencies
 
 ```bash
 npm install
 ```
 
-### Запуск в режиме разработки
+### Running in Development Mode
 
 ```bash
 npm run dev
 ```
 
-Приложение доступно по адресу `http://localhost:3000`
+The application is available at `http://localhost:3000`
 
-### Сборка для продакшена
+### Building for Production
 
 ```bash
 npm run build
 npm start
 ```
 
-### Линтинг
+### Linting
 
 ```bash
 npm run lint
 ```
 
-## Структура проекта
+## Project Structure
 
 ```
 src/
-├── app/              # Next.js App Router страницы
+├── app/              # Next.js App Router pages
 │   ├── layout.tsx
-│   ├── page.tsx      # Главная страница
-│   ├── products/     # Страница списка книг
-│   └── create-product/  # Страница добавления книги
-├── features/         # Бизнес-логика приложения
+│   ├── page.tsx      # Home page
+│   ├── products/     # Book list page
+│   └── create-product/  # Add book page
+├── features/         # Application business logic
 │   ├── products/
 │   │   ├── slice.ts     # Redux slice
 │   │   └── selectors.ts # Redux selectors
-│   └── ui/           # UI компоненты
+│   └── ui/           # UI components
 │       ├── ProductCard.tsx
 │       ├── ProductsList.tsx
 │       └── ProductsFilters.tsx
-├── shared/           # Общий код
-│   ├── api/          # API клиент
-│   └── types/        # TypeScript типы
-├── store/            # Redux store настройка
-└── styles/           # Глобальные стили
+├── shared/           # Shared code
+│   ├── api/          # API client
+│   └── types/        # TypeScript types
+├── store/            # Redux store setup
+└── styles/           # Global styles
 ```
 
-## Основные возможности
+## Main Features
 
-- **Просмотр каталога**: Загрузка и отображение книг с Open Library API
-- **Добавление книг**: Форма с валидацией для добавления новых книг
-- **Избранное**: Возможность добавлять/удалять книги в избранное
-- **Фильтрация**: Фильтрация по статусу (все книги / избранные)
-- **Валидация**: Проверка всех полей при добавлении книги в реальном времени
+- **Catalog View**: Loading and displaying books from Open Library API
+- **Adding Books**: Form with validation for adding new books
+- **Favorites**: Ability to add/remove books to/from favorites
+- **Filtering**: Filtering by status (all books / favorites)
+- **Validation**: Checking all fields when adding a book in real time
 
-## Типы данных
+## Data Types
 
 ### Book
 
-Интерфейс для представления книги в приложении:
+Interface for representing a book in the application:
 
 ```typescript
 interface Book {
@@ -88,109 +88,109 @@ interface Book {
 }
 ```
 
-## Архитектура приложения
+## Application Architecture
 
-Приложение построено с использованием современных паттернов и принципов:
+The application is built using modern patterns and principles:
 
-### Redux слой (State Management)
+### Redux Layer (State Management)
 
-**Файл:** `src/features/products/slice.ts`
+**File:** `src/features/products/slice.ts`
 
-Управляет состоянием каталога:
-- `items` - массив всех книг в каталоге
-- `filter` - текущий фильтр ("all" или "liked")
-- `isLoading` - статус загрузки
+Manages the catalog state:
+- `items` - array of all books in the catalog
+- `filter` - current filter ("all" or "liked")
+- `isLoading` - loading status
 
-**Действия:**
-- `setProducts` - установка всех книг
-- `addProduct` - добавление новой книги
-- `deleteProduct` - удаление книги
-- `toggleLike` - переключение статуса избранного
-- `setFilter` - установка фильтра
+**Actions:**
+- `setProducts` - set all books
+- `addProduct` - add a new book
+- `deleteProduct` - delete a book
+- `toggleLike` - toggle favorite status
+- `setFilter` - set filter
 
-### Компоненты
+### Components
 
 #### ProductsList
-Отвечает за отображение списка книг в виде сетки карточек. Использует Redux селектор для получения отфильтрованного списка книг.
+Responsible for displaying the list of books in a grid of cards. Uses Redux selector to get the filtered list of books.
 
 #### ProductCard
-Компонент карточки книги, отображающий:
-- Обложку книги
-- Название
-- Автора
-- Кнопку добавления в избранное
-- Возможность просмотра деталей
+Book card component displaying:
+- Book cover
+- Title
+- Author
+- Add to favorites button
+- View details option
 
 #### ProductsFilters
-Компонент фильтров с кнопками для выбора:
-- Все книги
-- Избранные книги
+Filter component with buttons to select:
+- All books
+- Favorite books
 
-Также отвечает за загрузку каталога книг с API при первом открытии приложения.
+Also responsible for loading the book catalog from API on first open.
 
 #### CreateProductForm
-Форма для добавления новой книги с полями:
-- Название книги (обязательно, минимум 3 символа)
-- Автор (обязательно, минимум 2 символа)
-- Описание (обязательно, минимум 10 символов)
-- Дата публикации (обязательно, не может быть в будущем)
+Form for adding a new book with fields:
+- Book title (required, minimum 3 characters)
+- Author (required, minimum 2 characters)
+- Description (required, minimum 10 characters)
+- Publication date (required, cannot be in the future)
 
-Форма имеет валидацию в реальном времени с выводом сообщений об ошибках.
+The form has real-time validation with error message display.
 
-## Валидация
+## Validation
 
-Валидация осуществляется через функцию `validateField`, которая:
-- Проверяет обязательность поля
-- Проверяет минимальную длину значения
-- Для даты публикации проверяет, что она не в будущем
+Validation is performed through the `validateField` function, which:
+- Checks field requirement
+- Checks minimum value length
+- For publication date, checks that it is not in the future
 
-Ошибки выводятся под полем и подсвечивают его красным бордером при возникновении ошибки валидации.
+Errors are displayed under the field and highlight it with a red border when a validation error occurs.
 
-## API интеграция
+## API Integration
 
 ### Open Library API
 
-Приложение использует Open Library API для загрузки каталога книг:
-- Эндпоинт: `https://openlibrary.org/search.json`
-- Загружает 20 книг жанра "fiction" при открытии приложения
+The application uses Open Library API to load the book catalog:
+- Endpoint: `https://openlibrary.org/search.json`
+- Loads 20 books of the "fiction" genre on application open
 
-**Файл:** `src/shared/api/openlibrary.ts`
+**File:** `src/shared/api/openlibrary.ts`
 
-## Взаимодействие компонентов
+## Component Interaction
 
-1. **Загрузка**: При монтировании `ProductsFilters` загружает книги, если список пуст
-2. **Добавление**: Пользователь заполняет форму на `/create-product` и отправляет данные
-3. **Redux**: Новая книга добавляется в Redux состояние через `addProduct`
-4. **Отображение**: `ProductsList` автоматически обновляется и показывает новую книгу
-5. **Фильтрация**: Селектор `selectFilteredProducts` фильтрует книги по статусу
+1. **Loading**: On `ProductsFilters` mount, loads books if the list is empty
+2. **Adding**: User fills the form on `/create-product` and submits data
+3. **Redux**: New book is added to Redux state via `addProduct`
+4. **Display**: `ProductsList` automatically updates and shows the new book
+5. **Filtering**: `selectFilteredProducts` selector filters books by status
 
-## Основные страницы
+## Main Pages
 
 ### `/`
-Главная страница с редиректом на `/products`
+Home page with redirect to `/products`
 
 ### `/products`
-Основная страница каталога с:
-- Заголовком "Booklet"
-- Кнопкой "Добавить книгу"
-- Фильтрами
-- Сеткой карточек книг
+Main catalog page with:
+- "Booklet" title
+- "Add book" button
+- Filters
+- Grid of book cards
 
 ### `/create-product`
-Форма добавления новой книги с:
-- Полями ввода с валидацией
-- Кнопкой "Добавить книгу"
-- Кнопкой отмены (возврат в каталог)
-- Сообщениями об ошибках
+Form for adding a new book with:
+- Input fields with validation
+- "Add book" button
+- Cancel button (return to catalog)
+- Error messages
 
-## Развертывание
+## Deployment
 
 ```bash
 npm run build
 ```
 
-Готовые файлы находятся в папке `.next`
+Built files are located in the `.next` folder
 
-## Автор
+## Author
 
-Евгения Федорова
+Evgeniia Fedorova

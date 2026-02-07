@@ -52,7 +52,7 @@ export default function ProductsFilters() {
             filter === "all" ? styles.buttonActive : styles.buttonInactive
           }`}
         >
-          Все книги
+          All books
         </button>
         <button
           onClick={() => dispatch(setFilter("liked"))}
@@ -60,7 +60,7 @@ export default function ProductsFilters() {
             filter === "liked" ? styles.buttonActive : styles.buttonInactive
           }`}
         >
-          Избранное
+          Favorites
         </button>
       </div>
     </div>

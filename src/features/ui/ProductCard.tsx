@@ -68,7 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             </>
           ) : (
-            <span className={styles.ratingCount}>Нет оценок</span>
+            <span className={styles.ratingCount}>No ratings</span>
           )}
         </div>
 
@@ -87,13 +87,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             }}
             className={styles.detailsButton}
           >
-            Подробнее
+            Details
           </button>
           <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              if (confirm("Удалить эту книгу?")) {
+              if (confirm("Delete this book?")) {
                 dispatch(deleteProduct(product.id));
               }
             }}
